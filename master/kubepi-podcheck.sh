@@ -10,3 +10,5 @@ echo " "
 kubectl get services
 echo " "
 kubectl get pods
+echo " "
+kubectl get pods -a -o wide --all-namespaces
