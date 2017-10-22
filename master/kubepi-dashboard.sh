@@ -1,5 +1,9 @@
 #!/bin/bash
 
-curl -sSL https://rawgit.com/kubernetes/dashboard/master/src/deploy/kubernetes-dashboard.yaml | sed "s/amd64/arm/g" | kubectl create -f -
+kubectl create secret generic kubernetes-dashboard-certs --from-file=$HOME/certs -n kube-system
 
-kubectl -n kube-system get service kubernetes-dashboard -o template --template="{{ (index .spec.ports 0).nodePort }}" | xargs echo
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard-arm-head.yaml
+
+kubectl -n kube-system delete $(kubectl -n kube-system get pod -o name | grep dashboard)
