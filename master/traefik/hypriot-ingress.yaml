@@ -4,7 +4,7 @@ metadata:
   name: hypriot
 spec:
   rules:
-  - host: 10.98.47.167
+  - host: hypriot
     http:
       paths:
       - path: /
