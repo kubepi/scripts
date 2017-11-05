@@ -10,6 +10,7 @@ curl -sSL https://rawgit.com/coreos/flannel/v0.7.1/Documentation/kube-flannel.ym
 # Run the following on all nodes
 sudo iptables -A FORWARD -i cni0 -j ACCEPT
 sudo iptables -A FORWARD -o cni0 -j ACCEPT
+sudo iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport 8090
 
 # Install the load balancer to expose externally
 kubectl apply -f https://raw.githubusercontent.com/hypriot/rpi-traefik/master/traefik-k8s-example.yaml
@@ -24,5 +25,6 @@ kubectl label node black-pearl-slave-b nginx-controller=traefik
 
 kubectl apply -f hypriot-ingress.yaml
 
-echo "10.98.47.167 hypriot" | sudo tee -a /etc/hosts
+# IP Address is cluster IP
+echo "10.105.54.227 hypriotb" | sudo tee -a /etc/hosts
 curl hypriot

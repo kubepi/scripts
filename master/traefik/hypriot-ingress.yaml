@@ -1,13 +1,12 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: hypriot
+  name: hypriotb
 spec:
   rules:
-  - host: hypriot
-    http:
+  - http:
       paths:
-      - path: /
+      - path: /test
         backend:
-          serviceName: hypriot
-          servicePort: 80
+          serviceName: hypriotb
+          servicePort: 8090
