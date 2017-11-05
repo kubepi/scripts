@@ -4,9 +4,10 @@ metadata:
   name: hypriotb
 spec:
   rules:
-  - http:
+  - host: hypriotb
+    http:
       paths:
-      - path: /test
+      - path: /
         backend:
           serviceName: hypriotb
-          servicePort: 8090
+          servicePort: 80
