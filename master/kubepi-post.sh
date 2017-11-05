@@ -12,11 +12,12 @@ sudo iptables -A FORWARD -i cni0 -j ACCEPT
 sudo iptables -A FORWARD -o cni0 -j ACCEPT
 
 # Install the load balancer to expose externally
-#kubectl apply -f https://raw.githubusercontent.com/hypriot/rpi-traefik/master/traefik-k8s-example.yaml
-kubectl apply -f https://raw.githubusercontent.com/containous/traefik/master/examples/k8s/traefik-deployment.yaml
+kubectl apply -f https://raw.githubusercontent.com/hypriot/rpi-traefik/master/traefik-k8s-example.yaml
+#kubectl apply -f https://raw.githubusercontent.com/containous/traefik/master/examples/k8s/traefik-deployment.yaml
 
 kubectl label node <load balancer-node> nginx-controller=traefik
 kubectl label node black-pearl-master nginx-controller=traefik
+kubectl label node black-pearl-slave-a nginx-controller=traefik
 kubectl label node black-pearl-slave-b nginx-controller=traefik
 
 cat > hypriot-ingress.yaml <<EOF
